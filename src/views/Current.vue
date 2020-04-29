@@ -26,10 +26,10 @@ export default {
 		getWeather(place) {
 			// removes prev search if exists
 			this.weather = [];
-
+		
 			axios
 				.get(
-					`https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${process.env.VUE_APP_WEATHER_KEY}`
+					`https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
 				)
 
 				.then((res) => this.weather.push(res.data))
