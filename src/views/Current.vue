@@ -1,40 +1,47 @@
 <template>
 	<div class="current">
-		<Form v-on:get-weather="getWeather" />
+		<!-- <Sidebar v-on:get-weather="getWeather" /> -->
 		<CurrentBody v-bind:weather="weather" />
 	</div>
 </template>
 
 <script>
-import axios from 'axios';
-import Form from '../components/Form';
+//import Sidebar from '../components/layout/Sidebar';
 import CurrentBody from '../components/layout/CurrentBody';
-
+import { mapActions } from 'vuex';
 export default {
 	name: 'Current',
 	components: {
-		Form,
+		//	Sidebar,
 		CurrentBody,
 	},
 	data() {
 		return {
-			weather: [],
+			
+			myCoords: {
+				lat: 0,
+				lng: 0,
+			},
 		};
 	},
+	methods: mapActions(['fetchWeatherCoords']),
+	created() {
+		this.$getLocation().then((coordinates) => {
+			this.myCoords = {
+				lat: coordinates.lat,
+				lng: coordinates.lng,
+			};
 
-	methods: {
-		getWeather(place) {
-			// removes prev search if exists
-			this.weather = [];
-		
-			axios
-				.get(
-					`https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
-				)
-
-				.then((res) => this.weather.push(res.data))
-				.catch((err) => console.log(err));
-		},
+			this.fetchWeatherCoords(this.myCoords);
+		});
 	},
+	
 };
 </script>
+
+<style scoped>
+.current {
+	width: 800px;
+	margin: 0 auto;
+}
+</style>

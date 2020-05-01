@@ -1,10 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import VueGeolocation from 'vue-browser-geolocation';
 
-Vue.config.productionTip = false
+Vue.use(VueGeolocation);
+Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+	router,
+	store,
+	render: (h) => h(App),
+}).$mount('#app');
