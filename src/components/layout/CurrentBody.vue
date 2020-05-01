@@ -1,32 +1,43 @@
 <template>
 	<div class="currentBody">
 		<h1>Current Weather</h1>
-		<h3>{{ weather.name }}</h3>
-
-		<p>{{ weather.main.humidity }}</p>
-
-		<p>{{ weather.main.pressure }}</p>
-		<p>{{ weather.main.temp }}</p>
-		<p>{{ weather.main.temp_max }}</p>
-		<p>{{ weather.main.temp_min }}</p>
-		<div v-for="x in weather.weather" :key="x.id">
-			<p>{{ x.description }}</p>
+		<div v-if="getError">
+			<h1>cant find that place please try again</h1>
 		</div>
+		<div v-if="getWeather.name">
+			<h3>{{ getWeather.name }}</h3>
 
-		<p>{{ weather.coord.lat }}, {{ weather.coord.lon }}</p>
+			<p>
+				feels like:
+				{{ getWeather.main.feels_like }}
+			</p>
+			<p>humidity: {{ getWeather.main.humidity }}</p>
+
+			<p>pressure: {{ getWeather.main.pressure }}</p>
+			<p>tempurature: {{ getWeather.main.temp }}</p>
+			<p>Max Temp: {{ getWeather.main.temp_max }}</p>
+			<p>Min Temp: {{ getWeather.main.temp_min }}</p>
+			<div v-for="x in getWeather.weather" :key="x.id">
+				<p>desc: {{ x.description }}</p>
+				<p>main: {{ x.main }}</p>
+			</div>
+			<p>wind deg:{{ getWeather.wind.deg }}</p>
+			<p>wind speed:{{ getWeather.wind.speed }}</p>
+			<p>lat: {{ getWeather.coord.lat }}, lng: {{ getWeather.coord.lon }}</p>
+		</div>
+		<div v-else><h2>...Loading</h2></div>
 	</div>
 </template>
 
 <script>
-//import { mapState } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
 	name: 'CurrentBody',
-	//computed: { ...mapGetters(['getWeather']) },
-	computed: {
-		weather() {
-			return this.$store.state.weather.weather;
-		},
-		//...mapState(['weather'])
+	computed: { ...mapGetters(['getWeather', 'getError']) },
+
+	methods: {
+		...mapActions([]),
+		...mapMutations([]),
 	},
 };
 </script>

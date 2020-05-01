@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <h3>sidebar</h3>
-    <Form v-on:get-weather="getWeather" />
+    <Form />
   </div>
 </template>
 
@@ -13,12 +13,7 @@ export default {
   components: {
     Form
   },
-  data (){
-      return {
-          weather: []
-      }
-      
-  },
+
   methods: {
    
   }

@@ -1,30 +1,46 @@
 import axios from 'axios';
 
+const URL = 'https://api.openweathermap.org/data/2.5/weather?';
+
 const state = {
 	weather: [],
+	errMsg: false,
 };
 
 const getters = {
 	getWeather: (state) => state.weather,
+	getError: (state) => state.errMsg,
 };
 
 const actions = {
 	async fetchWeatherCoords({ commit }, coords) {
-		const response = await axios.get(
-			`https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lng}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
-		);
-		commit('setWeather', response.data);
+		try {
+			commit('setError', false);
+			const response = await axios.get(
+				`${URL}lat=${coords.lat}&lon=${coords.lng}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
+			);
+			commit('setWeather', response.data);
+		} catch (err) {
+			commit('setError', true);
+		}
 	},
 	async fetchWeather({ commit }, place) {
-		const response = await axios.get(
-			`https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
-		);
-		commit('setWeather', response.data);
+		try {
+			commit('setError', false);
+			commit('setWeather', []);
+			const response = await axios.get(
+				`${URL}q=${place}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
+			);
+			if (response) commit('setWeather', response.data);
+		} catch (err) {
+			commit('setError', true);
+		}
 	},
 };
 
 const mutations = {
 	setWeather: (state, weather) => (state.weather = weather),
+	setError: (state, errMsg) => (state.errMsg = errMsg),
 };
 
 export default {
