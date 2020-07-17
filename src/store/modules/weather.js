@@ -3,16 +3,20 @@ import axios from 'axios';
 const URL = 'https://api.openweathermap.org/data/2.5/weather?';
 
 const state = {
+	place: 'columbus',
 	weather: [],
 	errMsg: false,
 };
 
 const getters = {
+	getPlace: (state) => state.place,
 	getWeather: (state) => state.weather,
 	getError: (state) => state.errMsg,
 };
 
 const actions = {
+	setPlace: ({ commit }) => commit('setPlace'),
+
 	async fetchWeatherCoords({ commit }, coords) {
 		try {
 			commit('setError', false);
@@ -24,7 +28,10 @@ const actions = {
 			commit('setError', true);
 		}
 	},
-	async fetchWeather({ commit }, place) {
+	async fetchWeather({ commit, state }) {
+		console.log(`place ${place}`);
+		console.log(`state.place: ${state.place}`);
+		let place = state.place;
 		try {
 			commit('setError', false);
 			commit('setWeather', []);
@@ -39,6 +46,7 @@ const actions = {
 };
 
 const mutations = {
+	setPlace: (state, place) => (state.place = place),
 	setWeather: (state, weather) => (state.weather = weather),
 	setError: (state, errMsg) => (state.errMsg = errMsg),
 };
