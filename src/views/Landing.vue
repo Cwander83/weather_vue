@@ -1,23 +1,28 @@
 <template>
   <div class="landing">
-    <Body />
+    <h2>The Top 10 Largest U.S. Cities by Population</h2>
+    <TopCities />
   </div>
 </template>
 
 <script>
-import Body from "../components/layout/Body";
+import TopCities from "../components/TopCities";
 
 export default {
   name: "Landing",
   components: {
-    Body
+    TopCities
   }
 };
 </script>
 
 <style scoped>
 .landing {
-  width: fit-content;
+  width: 100%;
   margin: 0 auto;
+}
+.landing h2 {
+  text-align: center;
+  color: white;
 }
 </style>

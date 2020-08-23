@@ -8,7 +8,7 @@
         v-model="place"
         placeholder="City, State, Zipcode"
       />
-      <button type="submit" class="btn" v-bind:disabled="place === null">
+      <button type="submit" class="btn" v-bind:disabled="place === ''">
         <i class="fas fa-search"></i>
       </button>
     </form>
@@ -16,29 +16,29 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 // import CurrLocationBtn from './CurrLocationBtn';
 export default {
   name: "Form",
   components: {
     //CurrLocationBtn,
   },
-  computed: mapGetters(["getPlace"]),
+  // computed: mapGetters(["getPlace"]),
   data() {
     return {
       place: ""
     };
   },
   methods: {
-    ...mapActions(["setPlace"]),
+    ...mapActions(["fetchWeather"]),
+    ...mapMutations(["setPlace"]),
 
     onSubmit() {
       console.log("clicked");
       console.log(`$form place: ${this.place}`);
-      if (this.place !== "") {
-        this.setPlace(this.place);
-        console.log(`$form place after: ${this.place}`);
-        }
+      this.fetchWeather(this.place);
+      this.setPlace(this.place);
+      this.place = "";
       // clear place after form
     }
   }

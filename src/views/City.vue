@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import {  mapMutations, mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "City",
   components: {},
@@ -41,15 +41,14 @@ export default {
     this.fetchWeather();
   },
   computed: {
-    places() {
-      return this.$store.state.places;
-    }
+    ...mapGetters(["getError", "getWeather"]),
+   
   },
 
   methods: {
-    ...mapActions(["fetchWeather"]),
-    ...mapMutations([])
-  }
+    ...mapActions(["fetchWeather"])
+  },
+  
 };
 </script>
 

@@ -1,20 +1,20 @@
 <template>
-  <div id="app">
+  <div class="app">
     <Header />
-    
-    <router-view />
+
+    <Body />
   </div>
 </template>
 
 <script>
 import Header from "./components/layout/Header";
-
+import Body from "./components/layout/Body";
 
 export default {
   name: "App",
   components: {
     Header,
-  
+    Body
   }
 };
 </script>
@@ -39,11 +39,10 @@ body {
   color: #eceff1;
   min-height: 600px;
   height: 100%;
-  z-index: 10;
+
   display: flex;
   flex-direction: column;
   max-width: 1600px;
   margin: auto;
- 
 }
 </style>
