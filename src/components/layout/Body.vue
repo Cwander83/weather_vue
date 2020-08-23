@@ -1,20 +1,21 @@
 <template>
   <div class="body">
-    <TopCities />
+    <router-view />
   </div>
 </template>
 
 <script>
-import TopCities from "../TopCities";
+
 export default {
   components: {
-    TopCities
+    
   }
 };
 </script>
 
 <style scoped>
 .body {
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 </style>

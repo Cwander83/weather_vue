@@ -15,34 +15,32 @@ const getters = {
 };
 
 const actions = {
-	setPlace: ({ commit }) => commit('setPlace'),
+	async fetchWeather({ commit, state }, place) {
+		try {
+			let area = place ? (place === '' ? state.place : place) : state.place;
 
-	async fetchWeatherCoords({ commit }, coords) {
-		try {
-			commit('setError', false);
-			const response = await axios.get(
-				`${URL}lat=${coords.lat}&lon=${coords.lng}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
-			);
-			commit('setWeather', response.data);
-		} catch (err) {
-			commit('setError', true);
-		}
-	},
-	async fetchWeather({ commit, state }) {
-		console.log(`place ${place}`);
-		console.log(`state.place: ${state.place}`);
-		let place = state.place;
-		try {
 			commit('setError', false);
 			commit('setWeather', []);
 			const response = await axios.get(
-				`${URL}q=${place}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
+				`${URL}q=${area}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
 			);
 			if (response) commit('setWeather', response.data);
 		} catch (err) {
 			commit('setError', true);
 		}
 	},
+
+	//async fetchWeatherCoords({ commit }, coords) {
+	// 	try {
+	// 		commit('setError', false);
+	// 		const response = await axios.get(
+	// 			`${URL}lat=${coords.lat}&lon=${coords.lng}&appid=${process.env.VUE_APP_WEATHER_KEY}&units=imperial`
+	// 		);
+	// 		commit('setWeather', response.data);
+	// 	} catch (err) {
+	// 		commit('setError', true);
+	// 	}
+	// },
 };
 
 const mutations = {
