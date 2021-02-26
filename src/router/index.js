@@ -11,7 +11,7 @@ const routes = [
 		component: Landing,
 	},
 	{
-		path: '/City',
+		path: '/city',
 		name: 'City',
 		// route level code-splitting
 		// this generates a separate chunk (City.[hash].js) for this route

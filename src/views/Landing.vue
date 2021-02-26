@@ -24,5 +24,6 @@ export default {
 .landing h2 {
   text-align: center;
   color: white;
+  padding: 15px 0;
 }
 </style>
