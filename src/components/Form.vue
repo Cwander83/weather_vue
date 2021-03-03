@@ -16,32 +16,26 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
-// import CurrLocationBtn from './CurrLocationBtn';
+import { mapMutations } from "vuex";
+
 export default {
   name: "Form",
-  components: {
-    //CurrLocationBtn,
-  },
-  // computed: mapGetters(["getPlace"]),
+  components: {},
   data() {
     return {
-      place: ""
+      place: "",
     };
   },
+
   methods: {
-    ...mapActions(["fetchWeather"]),
     ...mapMutations(["setPlace"]),
 
     onSubmit() {
-      console.log("clicked");
-      console.log(`$form place: ${this.place}`);
-      this.fetchWeather(this.place);
       this.setPlace(this.place);
       this.place = "";
       // clear place after form
-    }
-  }
+    },
+  },
 };
 </script>
 

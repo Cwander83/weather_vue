@@ -26,11 +26,7 @@ export default {
       showMenu: false,
     };
   },
-  methods: {
-    toggleMenu() {
-      this.showMenu = !this.showMenu;
-    },
-  },
+  methods: {},
   computed: {
     homePage() {
       if (this.$route.path === "/") return true;
@@ -76,10 +72,10 @@ header {
   cursor: pointer;
 }
 .header-container h1 {
-  font-size: 50px;
+  font-size: 30px;
   width: 100%;
   margin: 4% auto 0 auto;
-
+  color: gray;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: -1px;

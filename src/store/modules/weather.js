@@ -3,7 +3,7 @@ import axios from 'axios';
 const URL = 'https://api.openweathermap.org/data/2.5/weather?';
 
 const state = {
-	place: 'columbus',
+	place: '',
 	weather: [],
 	errMsg: false,
 };
@@ -26,6 +26,7 @@ const actions = {
 			);
 			if (response) commit('setWeather', response.data);
 		} catch (err) {
+			console.error(err);
 			commit('setError', true);
 		}
 	},

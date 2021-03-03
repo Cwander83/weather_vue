@@ -1,6 +1,7 @@
 <template>
   <div class="top-cities-wrapper">
     <div class="city-container">
+      
       <div class="top-city" v-for="(city, index) in cities" :key="index">
         <h2 class="city-name">{{ city.name }}</h2>
         <router-link to="/city">
@@ -12,26 +13,19 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   name: "TopCities",
 
   methods: {
-    ...mapActions(["fetchWeather"]),
     ...mapMutations(["setPlace"]),
-    openSection(city) {
-      console.log(city.name);
-      let city2 = this.cities.filter((city) => city.name === this.cities.name);
-      console.log(city2);
-    },
+    
   },
-  computed: {
-    ...mapGetters(["getWeather"]),
-  },
+ 
 
   data() {
     return {
-      place: "",
+      
       cities: [
         {
           name: "New York City, NY",
